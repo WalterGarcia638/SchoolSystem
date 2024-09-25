@@ -6,45 +6,10 @@
         </div>
     </div>
 
-    <!-- Formulario de Estudiantes -->
-    <form class="mb-4">
-        <div class="row">
-            <div class="col-md-6">
-                <label for="firstName" class="form-label">First Name</label>
-                <input [(ngModel)]="firstName" name="firstName" class="form-control" id="firstName" placeholder="Enter first name" required>
-            </div>
-            <div class="col-md-6">
-                <label for="lastName" class="form-label">Last Name</label>
-                <input [(ngModel)]="lastName" name="lastName" class="form-control" id="lastName" placeholder="Enter last name" required>
-            </div>
-        </div>
-
-        <div class="row mt-3">
-            <div class="col-md-4">
-                <label for="age" class="form-label">Age</label>
-                <input [(ngModel)]="age" name="age" type="number" class="form-control" id="age" placeholder="Enter age" required min="1">
-            </div>
-            <div class="col-md-4">
-                <label for="dateOfBirth" class="form-label">Date of Birth</label>
-                <input [(ngModel)]="dateOfBirth" name="dateOfBirth" type="date" class="form-control" id="dateOfBirth" required>
-            </div>
-            <div class="col-md-4">
-                <label for="courseId" class="form-label">Course</label>
-                <select [(ngModel)]="courseId" name="courseId" class="form-select" id="courseId" required>
-                    <option *ngFor="let course of courses" [value]="course.id">{{ course.name }}</option>
-                </select>
-            </div>
-        </div>
-
-        <div class="mt-3">
-            <label for="address" class="form-label">Address</label>
-            <textarea [(ngModel)]="address" name="address" class="form-control" id="address" placeholder="Enter address" required></textarea>
-        </div>
-
-        <div class="d-grid gap-2 mt-3">
-            <button type="button" class="btn btn-primary" (click)="submitForm()">Save</button>
-        </div>
-    </form>
+    <!-- Botón para crear estudiante -->
+    <div class="d-grid gap-2 mb-4">
+        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#studentModal">Crear Estudiante</button>
+    </div>
 
     <!-- Tabla de Estudiantes -->
     <table class="table table-hover table-bordered mt-4">
@@ -66,13 +31,64 @@
                 <td>{{ student.age }}</td>
                 <td>{{ student.dateOfBirth | date }}</td>
                 <td>{{ student.courseName }}</td>
-                <!--<td>{{ student.courseId }}</td>-->
                 <td>{{ student.address }}</td>
                 <td>
-                    <button class="btn btn-info btn-sm me-2" (click)="editStudent(student)">Edit</button>
+                    <button class="btn btn-info btn-sm me-2" (click)="editStudent(student)" data-bs-toggle="modal" data-bs-target="#studentModal">Edit</button>
                     <button class="btn btn-danger btn-sm" (click)="deleteStudent(student.id)">Delete</button>
                 </td>
             </tr>
         </tbody>
     </table>
+
+    <!-- Modal para el formulario -->
+    <div class="modal fade" id="studentModal" tabindex="-1" aria-labelledby="studentModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="studentModalLabel">{{ editing ? 'Edit Student' : 'Create Student' }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="firstName" class="form-label">First Name</label>
+                                <input [(ngModel)]="firstName" name="firstName" class="form-control" id="firstName" placeholder="Enter first name" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="lastName" class="form-label">Last Name</label>
+                                <input [(ngModel)]="lastName" name="lastName" class="form-control" id="lastName" placeholder="Enter last name" required>
+                            </div>
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col-md-4">
+                                <label for="age" class="form-label">Age</label>
+                                <input [(ngModel)]="age" name="age" type="number" class="form-control" id="age" placeholder="Enter age" required min="1">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="dateOfBirth" class="form-label">Date of Birth</label>
+                                <input [(ngModel)]="dateOfBirth" name="dateOfBirth" type="date" class="form-control" id="dateOfBirth" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="courseId" class="form-label">Course</label>
+                                <select [(ngModel)]="courseId" name="courseId" class="form-select" id="courseId" required>
+                                    <option *ngFor="let course of courses" [value]="course.id">{{ course.name }}</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="mt-3">
+                            <label for="address" class="form-label">Address</label>
+                            <textarea [(ngModel)]="address" name="address" class="form-control" id="address" placeholder="Enter address" required></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" (click)="submitForm()">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
