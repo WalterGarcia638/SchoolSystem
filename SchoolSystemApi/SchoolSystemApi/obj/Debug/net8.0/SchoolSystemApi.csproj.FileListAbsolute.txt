@@ -275,3 +275,5 @@ D:\PruebaTecnica\BHD\SchoolSystem\SchoolSystemApi\SchoolSystemApi\obj\Debug\net8
 D:\PruebaTecnica\BHD\SchoolSystem\SchoolSystemApi\SchoolSystemApi\obj\Debug\net8.0\SchoolSystemApi.genruntimeconfig.cache
 D:\PruebaTecnica\BHD\SchoolSystem\SchoolSystemApi\SchoolSystemApi\obj\Debug\net8.0\ref\SchoolSystemApi.dll
 D:\PruebaTecnica\BHD\SchoolSystem\SchoolSystemApi\SchoolSystemApi\bin\Debug\net8.0\AutoMapper.dll
+D:\PruebaTecnica\BHD\SchoolSystem\SchoolSystemApi\SchoolSystemApi\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\PruebaTecnica\BHD\SchoolSystem\SchoolSystemApi\SchoolSystemApi\bin\Debug\net8.0\Microsoft.Bcl.TimeProvider.dll

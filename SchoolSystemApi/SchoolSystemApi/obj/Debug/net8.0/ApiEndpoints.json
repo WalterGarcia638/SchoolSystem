@@ -1,5 +1,21 @@
 [
   {
+    "ContainingType": "SchoolSystemApi.Auth.AuthController",
+    "Method": "Login",
+    "RelativePath": "api/Auth/login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "SchoolSystemApi.Model.Request.LoginRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "SchoolSystemApi.Controllers.CourseController",
     "Method": "GetCourse",
     "RelativePath": "api/Course",
