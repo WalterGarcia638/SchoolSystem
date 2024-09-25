@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "J4AltFwwk7TzdQFjIKYCfxtAObiSdhbce8wtKqKmwfqhNxE/OODJ+gffKrZjpulut56NsBc9hQcWagOWQYUDCw==",
+  "dgSpecHash": "eJfKKA04ofgW9vUXgB6yTqB+EhC9w/oypEvN7HIAlFYA0rLGnw++UvPj3n8q8XuRC18wOZWfj8kDNXBpoZzSBg==",
   "success": true,
-  "projectFilePath": "D:\\PruebaTecnica\\SchoolSystem\\SchoolSystemApi\\SchoolSystemApi\\SchoolSystemApi.csproj",
+  "projectFilePath": "D:\\PruebaTecnica\\BHD\\SchoolSystem\\SchoolSystemApi\\SchoolSystemApi\\SchoolSystemApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Walter Garcia\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\Walter Garcia\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",

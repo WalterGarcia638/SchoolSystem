@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\PruebaTecnica\\SchoolSystem\\SchoolSystemApi\\SchoolSystemApi\\SchoolSystemApi.csproj": {}
+    "D:\\PruebaTecnica\\BHD\\SchoolSystem\\SchoolSystemApi\\SchoolSystemApi\\SchoolSystemApi.csproj": {}
   },
   "projects": {
-    "D:\\PruebaTecnica\\SchoolSystem\\SchoolSystemApi\\SchoolSystemApi\\SchoolSystemApi.csproj": {
+    "D:\\PruebaTecnica\\BHD\\SchoolSystem\\SchoolSystemApi\\SchoolSystemApi\\SchoolSystemApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\PruebaTecnica\\SchoolSystem\\SchoolSystemApi\\SchoolSystemApi\\SchoolSystemApi.csproj",
+        "projectUniqueName": "D:\\PruebaTecnica\\BHD\\SchoolSystem\\SchoolSystemApi\\SchoolSystemApi\\SchoolSystemApi.csproj",
         "projectName": "SchoolSystemApi",
-        "projectPath": "D:\\PruebaTecnica\\SchoolSystem\\SchoolSystemApi\\SchoolSystemApi\\SchoolSystemApi.csproj",
+        "projectPath": "D:\\PruebaTecnica\\BHD\\SchoolSystem\\SchoolSystemApi\\SchoolSystemApi\\SchoolSystemApi.csproj",
         "packagesPath": "C:\\Users\\Walter Garcia\\.nuget\\packages\\",
-        "outputPath": "D:\\PruebaTecnica\\SchoolSystem\\SchoolSystemApi\\SchoolSystemApi\\obj\\",
+        "outputPath": "D:\\PruebaTecnica\\BHD\\SchoolSystem\\SchoolSystemApi\\SchoolSystemApi\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
