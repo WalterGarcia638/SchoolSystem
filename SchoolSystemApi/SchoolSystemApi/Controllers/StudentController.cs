@@ -23,8 +23,9 @@ namespace SchoolSystemApi.Controllers
         public IActionResult GetStudent()
         {
             var StudentList = _StudentRepository.GetStudents();
+            var StudentDTOList = _mapper.Map<ICollection<GetStudentsDTO>>(StudentList);
 
-            return Ok(StudentList);
+            return Ok(StudentDTOList);
 
         }
 
@@ -75,17 +76,35 @@ namespace SchoolSystemApi.Controllers
             return Ok();
         }
 
+        /*   [HttpPatch("{StudentId:int}", Name = "GetStudentById")]
+           public IActionResult UpdateStudent(int StudentId, [FromBody] Student Student)
+           {
+               if (Student == null || StudentId == null || Student.Id == 0)
+               {
+                   return BadRequest(ModelState);
+               }
+
+               if (!_StudentRepository.UpdateStudent(Student))
+               {
+                   ModelState.AddModelError("", $"Error Update {Student.FirstName}");
+                   return StatusCode(500, ModelState);
+               }
+               return NoContent();
+           }*/
+
         [HttpPatch("{StudentId:int}", Name = "GetStudentById")]
-        public IActionResult UpdateStudent(int StudentId, [FromBody] Student Student)
+        public IActionResult UpdateStudent(int StudentId, [FromBody] UpdateStudentDTO updateStudentDTO)
         {
-            if (Student == null || StudentId == null || Student.Id == 0)
+            if (updateStudentDTO == null || StudentId == null || updateStudentDTO.Id == 0)
             {
                 return BadRequest(ModelState);
             }
 
-            if (!_StudentRepository.UpdateStudent(Student))
+            var student = _mapper.Map<Student>(updateStudentDTO);
+
+            if (!_StudentRepository.UpdateStudent(student))
             {
-                ModelState.AddModelError("", $"Error Update {Student.FirstName}");
+                ModelState.AddModelError("", $"Error Update {student.FirstName}");
                 return StatusCode(500, ModelState);
             }
             return NoContent();

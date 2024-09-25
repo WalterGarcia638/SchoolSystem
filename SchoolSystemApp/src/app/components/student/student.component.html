@@ -1,70 +1,78 @@
 <div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="card shadow-lg">
-                <div class="card-header bg-primary text-white text-center">
-                    <h3>Student Registration</h3>
-                </div>
-                <div class="card-body">
-                    <!--<form (ngSubmit)="submitForm()">-->
-                    <form>
-                        <div class="mb-3">
-                            <label for="firstName" class="form-label">First Name</label>
-                            <input [(ngModel)]="firstName" name="firstName" class="form-control" id="firstName" placeholder="Enter first name" required>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="lastName" class="form-label">Last Name</label>
-                            <input [(ngModel)]="lastName" name="lastName" class="form-control" id="lastName" placeholder="Enter last name" required>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="age" class="form-label">Age</label>
-                            <input [(ngModel)]="age" name="age" type="number" class="form-control" id="age" placeholder="Enter age" required min="1">
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="dateOfBirth" class="form-label">Date of Birth</label>
-                            <input [(ngModel)]="dateOfBirth" name="dateOfBirth" type="date" class="form-control" id="dateOfBirth" required>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="address" class="form-label">Address</label>
-                            <textarea [(ngModel)]="address" name="address" class="form-control" id="address" placeholder="Enter address" required></textarea>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="courseId" class="form-label">Course</label>
-                            <select [(ngModel)]="courseId" name="courseId" class="form-select" id="courseId" required>
-                  <option *ngFor="let course of courses" [value]="course.id">{{ course.name }}</option>
-                </select>
-                        </div>
-
-                        <div class="d-grid gap-2">
-                            <button type="submit" class="btn btn-primary" (click)="submitForm()">Save</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-
-            <!-- Search -->
-            <div class="input-group mt-5">
-                <input type="text" class="form-control" placeholder="Search by name" #searchInput (input)="searchStudents(searchInput.value)">
-                <button class="btn btn-outline-secondary" type="button">Search</button>
-            </div>
-
-            <!-- List of Students -->
-            <ul class="list-group mt-3">
-                <li *ngFor="let student of students" class="list-group-item d-flex justify-content-between align-items-center">
-                    <div>
-                        <strong>{{ student.firstName }} {{ student.lastName }}</strong>
-                    </div>
-                    <div>
-                        <button (click)="editStudent(student)" class="btn btn-sm btn-info me-2">Edit</button>
-                        <button (click)="deleteStudent(student.Id)" class="btn btn-sm btn-danger">Delete</button>
-                    </div>
-                </li>
-            </ul>
+    <!-- Barra de búsqueda -->
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <input type="text" [(ngModel)]="searchTerm" name="searchTerm" class="form-control" placeholder="Search by name" />
         </div>
     </div>
+
+    <!-- Formulario de Estudiantes -->
+    <form class="mb-4">
+        <div class="row">
+            <div class="col-md-6">
+                <label for="firstName" class="form-label">First Name</label>
+                <input [(ngModel)]="firstName" name="firstName" class="form-control" id="firstName" placeholder="Enter first name" required>
+            </div>
+            <div class="col-md-6">
+                <label for="lastName" class="form-label">Last Name</label>
+                <input [(ngModel)]="lastName" name="lastName" class="form-control" id="lastName" placeholder="Enter last name" required>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col-md-4">
+                <label for="age" class="form-label">Age</label>
+                <input [(ngModel)]="age" name="age" type="number" class="form-control" id="age" placeholder="Enter age" required min="1">
+            </div>
+            <div class="col-md-4">
+                <label for="dateOfBirth" class="form-label">Date of Birth</label>
+                <input [(ngModel)]="dateOfBirth" name="dateOfBirth" type="date" class="form-control" id="dateOfBirth" required>
+            </div>
+            <div class="col-md-4">
+                <label for="courseId" class="form-label">Course</label>
+                <select [(ngModel)]="courseId" name="courseId" class="form-select" id="courseId" required>
+                    <option *ngFor="let course of courses" [value]="course.id">{{ course.name }}</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="mt-3">
+            <label for="address" class="form-label">Address</label>
+            <textarea [(ngModel)]="address" name="address" class="form-control" id="address" placeholder="Enter address" required></textarea>
+        </div>
+
+        <div class="d-grid gap-2 mt-3">
+            <button type="button" class="btn btn-primary" (click)="submitForm()">Save</button>
+        </div>
+    </form>
+
+    <!-- Tabla de Estudiantes -->
+    <table class="table table-hover table-bordered mt-4">
+        <thead class="table-dark">
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Age</th>
+                <th>Date of Birth</th>
+                <th>Course</th>
+                <th>Address</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let student of getFilteredStudents()">
+                <td>{{ student.firstName }}</td>
+                <td>{{ student.lastName }}</td>
+                <td>{{ student.age }}</td>
+                <td>{{ student.dateOfBirth | date }}</td>
+                <td>{{ student.courseName }}</td>
+                <!--<td>{{ student.courseId }}</td>-->
+                <td>{{ student.address }}</td>
+                <td>
+                    <button class="btn btn-info btn-sm me-2" (click)="editStudent(student)">Edit</button>
+                    <button class="btn btn-danger btn-sm" (click)="deleteStudent(student.id)">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </div>

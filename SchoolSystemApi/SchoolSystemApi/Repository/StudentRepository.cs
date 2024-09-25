@@ -1,4 +1,5 @@
-﻿using SchoolSystemApi.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using SchoolSystemApi.Data;
 using SchoolSystemApi.Model;
 using SchoolSystemApi.Repository.IRepository;
 
@@ -13,7 +14,11 @@ namespace SchoolSystemApi.Repository
         }
         public ICollection<Student> GetStudents()
         {
-            return _db.Student.OrderBy(b => b.Id).ToList();
+            // return _db.Student.OrderBy(b => b.Id).ToList();
+            return _db.Student
+             .Include(s => s.Course) // Carga el curso asociado a cada estudiante
+             .OrderBy(b => b.Id)
+             .ToList();
         }
 
         public bool CreateStudent(Student Student)

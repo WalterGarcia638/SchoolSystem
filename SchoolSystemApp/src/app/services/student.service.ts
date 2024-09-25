@@ -24,7 +24,7 @@ export class StudentService {
 
   // Editar un estudiante existente
   updateStudent(id: number, student: Student): Observable<void> {
-    return this.http.put<void>(`${this.apiUrlStudents}/${id}`, student);
+    return this.http.patch<void>(`${this.apiUrlStudents}/${id}`, student); // Cambia 'put' a 'patch'
   }
 
   // Borrar un estudiante

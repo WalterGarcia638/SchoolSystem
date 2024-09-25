@@ -6,6 +6,7 @@ import { FormBuilder, FormsModule} from '@angular/forms';
 import { CourseService } from '../../services/course.service';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-student',
@@ -23,6 +24,7 @@ export class StudentComponent implements OnInit {
   dateOfBirth: string = '';
   address: string = '';
   courseId: number | null = null;
+  searchTerm: string = '';
 
   students: Student[] = [];
   courses: Course[] = [];
@@ -33,10 +35,8 @@ export class StudentComponent implements OnInit {
     private fb: FormBuilder,
     private studentService: StudentService,
     private courseService: CourseService
-  ) {
+  ) {}
     
-  }
-
   ngOnInit(): void {
     this.loadStudents();
     this.loadCourses();
@@ -59,25 +59,27 @@ export class StudentComponent implements OnInit {
   // Añadir o editar estudiante
   submitForm() {
     const student: Student = {
-      Id: this.currentStudentId ?? 0, // ID solo si es una edición
+      id: this.currentStudentId ?? 0, // ID solo si es una edición
       firstName: this.firstName,
       lastName: this.lastName,
       age: this.age!,
       dateOfBirth: new Date(this.dateOfBirth),
       address: this.address,
       courseId: this.courseId!,
-      //course: this.courses.find(c => c.courseId === this.courseId) || { courseId: 0, name: '', description: '' }
+      courseName:''
     };
 
     if (this.editing && this.currentStudentId !== null) {
       this.studentService.updateStudent(this.currentStudentId, student).subscribe(() => {
         this.loadStudents();
         this.resetForm();
+        Swal.fire('Updated!', 'Student details have been updated successfully.', 'success'); // SweetAlert para éxito
       });
     } else {
       this.studentService.addStudent(student).subscribe(() => {
         this.loadStudents();
         this.resetForm();
+        Swal.fire('Added!', 'Student has been added successfully.', 'success'); // SweetAlert para éxito
       });
     }
   }
@@ -85,7 +87,7 @@ export class StudentComponent implements OnInit {
   // Editar estudiante
   editStudent(student: Student) {
     this.editing = true;
-    this.currentStudentId = student.Id;
+    this.currentStudentId = student.id;
     this.firstName = student.firstName;
     this.lastName = student.lastName;
     this.age = student.age;
@@ -96,15 +98,20 @@ export class StudentComponent implements OnInit {
 
   // Borrar estudiante
   deleteStudent(studentId: number) {
-    this.studentService.deleteStudent(studentId).subscribe(() => {
-      this.loadStudents();
-    });
-  }
-
-  // Buscar estudiante
-  searchStudents(name: string) {
-    this.studentService.searchStudents(name).subscribe(data => {
-      this.students = data;
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'Do you really want to delete this student?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, cancel!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.studentService.deleteStudent(studentId).subscribe(() => {
+          this.loadStudents();
+          Swal.fire('Deleted!', 'Student has been deleted successfully.', 'success'); // SweetAlert para éxito
+        });
+      }
     });
   }
 
@@ -119,4 +126,16 @@ export class StudentComponent implements OnInit {
     this.address = '';
     this.courseId = null;
   }
+
+  getFilteredStudents(): Student[] {
+    if (!this.searchTerm) {
+      return this.students;
+    }
+    
+    return this.students.filter(student =>
+      student.firstName.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+      student.lastName.toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
+  }
+  
 }

@@ -10,6 +10,9 @@ namespace SchoolSystemApi.Mapper
         public  SchoolSystemMapper() 
         {
             CreateMap<Student, StudentDTO>().ReverseMap();
+            CreateMap<Student, UpdateStudentDTO>().ReverseMap();
+            CreateMap<Student, GetStudentsDTO>()
+            .ForMember(dest => dest.CourseName, opt => opt.MapFrom(src => src.Course.Name));
         }
         
     }

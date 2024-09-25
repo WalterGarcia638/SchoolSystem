@@ -166,8 +166,8 @@
         "IsRequired": true
       },
       {
-        "Name": "Student",
-        "Type": "SchoolSystemApi.Model.Student",
+        "Name": "updateStudentDTO",
+        "Type": "SchoolSystemApi.Model.DTO.UpdateStudentDTO",
         "IsRequired": true
       }
     ],
