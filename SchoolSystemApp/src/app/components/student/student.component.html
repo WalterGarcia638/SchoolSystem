@@ -4,30 +4,27 @@
 
 
 <div class="container mt-5">
-    <!-- Barra de búsqueda -->
     <div class="row mb-4 text-center">
         <div class="col-md-6 mx-auto">
             <input type="text" [(ngModel)]="searchTerm" name="searchTerm" class="form-control" placeholder="Search by name" />
         </div>
     </div>
 
-    <!-- Botones para crear estudiante y curso -->
     <div class="d-flex justify-content-end mb-4">
         <button class="btn btn-sm btn-primary me-2" data-bs-toggle="modal" data-bs-target="#studentModal">Crear Estudiante</button>
         <button class="btn btn-sm btn-secondary" data-bs-toggle="modal" data-bs-target="#courseModal">Crear Curso</button>
     </div>
 
-    <!-- Tabla de Estudiantes -->
     <table class="table table-hover table-bordered mt-4">
         <thead class="table-dark">
             <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Age</th>
-                <th>Date of Birth</th>
-                <th>Course</th>
-                <th>Address</th>
-                <th>Actions</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Edad</th>
+                <th>Fecha de nacimiento</th>
+                <th>Curso</th>
+                <th>Direccion</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -39,33 +36,32 @@
                 <td>{{ student.courseName }}</td>
                 <td>{{ student.address }}</td>
                 <td>
-                    <button class="btn btn-info btn-sm me-2" (click)="editStudent(student)" data-bs-toggle="modal" data-bs-target="#studentModal">Edit</button>
-                    <button class="btn btn-danger btn-sm" (click)="deleteStudent(student.id)">Delete</button>
+                    <button class="btn btn-info btn-sm me-2" (click)="editStudent(student)" data-bs-toggle="modal" data-bs-target="#studentModal">Editar</button>
+                    <button class="btn btn-danger btn-sm" (click)="deleteStudent(student.id)">Eliminar</button>
                 </td>
             </tr>
         </tbody>
     </table>
 
-    <!-- Modal para el formulario de Estudiante -->
     <div class="modal fade" id="studentModal" tabindex="-1" aria-labelledby="studentModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="studentModalLabel">{{ editing ? 'Edit Student' : 'Create Student' }}</h5>
+                    <h5 class="modal-title" id="studentModalLabel">{{ editing ? 'Editar estudiante' : 'Crear estudiante' }}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form #studentForm="ngForm">
                         <div class="row">
                             <div class="col-md-6">
-                                <label for="firstName" class="form-label">First Name</label>
+                                <label for="firstName" class="form-label">Nombre</label>
                                 <input [(ngModel)]="firstName" name="firstName" class="form-control" id="firstName" placeholder="Enter first name" required #firstNameModel="ngModel">
                                 <div *ngIf="firstNameModel.invalid && firstNameModel.touched" class="text-danger">
                                     First Name is required
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <label for="lastName" class="form-label">Last Name</label>
+                                <label for="lastName" class="form-label">Apellido</label>
                                 <input [(ngModel)]="lastName" name="lastName" class="form-control" id="lastName" placeholder="Enter last name" required #lastNameModel="ngModel">
                                 <div *ngIf="lastNameModel.invalid && lastNameModel.touched" class="text-danger">
                                     Last Name is required
@@ -75,21 +71,21 @@
 
                         <div class="row mt-3">
                             <div class="col-md-4">
-                                <label for="age" class="form-label">Age</label>
+                                <label for="age" class="form-label">Edad</label>
                                 <input [(ngModel)]="age" name="age" type="number" class="form-control" id="age" placeholder="Enter age" required min="1" #ageModel="ngModel">
                                 <div *ngIf="ageModel.invalid && ageModel.touched" class="text-danger">
                                     Age is required and must be a positive number
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <label for="dateOfBirth" class="form-label">Date of Birth</label>
+                                <label for="dateOfBirth" class="form-label">Fecha de nacimiento</label>
                                 <input [(ngModel)]="dateOfBirth" name="dateOfBirth" type="date" class="form-control" id="dateOfBirth" required #dateOfBirthModel="ngModel">
                                 <div *ngIf="dateOfBirthModel.invalid && dateOfBirthModel.touched" class="text-danger">
                                     Date of Birth is required
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <label for="courseId" class="form-label">Course</label>
+                                <label for="courseId" class="form-label">Curso</label>
                                 <select [(ngModel)]="courseId" name="courseId" class="form-select" id="courseId" required #courseIdModel="ngModel">
                                 <option *ngFor="let course of courses" [value]="course.id">{{ course.name }}</option>
                             </select>
@@ -100,7 +96,7 @@
                         </div>
 
                         <div class="mt-3">
-                            <label for="address" class="form-label">Address</label>
+                            <label for="address" class="form-label">Direccion</label>
                             <textarea [(ngModel)]="address" name="address" class="form-control" id="address" placeholder="Enter address" required #addressModel="ngModel"></textarea>
                             <div *ngIf="addressModel.invalid && addressModel.touched" class="text-danger">
                                 Address is required
@@ -109,34 +105,32 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" [disabled]="studentForm.invalid" (click)="submitForm()" data-bs-dismiss="modal">Save</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" [disabled]="studentForm.invalid" (click)="submitForm()" data-bs-dismiss="modal">Guardar</button>
                 </div>
             </div>
         </div>
     </div>
 
 
-    <!-- Modal para el formulario de Curso -->
     <div class="modal fade" id="courseModal" tabindex="-1" aria-labelledby="courseModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="courseModalLabel">{{ editingCourse ? 'Edit Course' : 'Create Course' }}</h5>
+                    <h5 class="modal-title" id="courseModalLabel">{{ editingCourse ? 'Editar curso' : 'Crear curso' }}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <!-- Formulario para crear/editar curso -->
                     <form #courseForm="ngForm">
                         <div class="mb-3">
-                            <label for="courseName" class="form-label">Course Name</label>
+                            <label for="courseName" class="form-label">Nombre del curso</label>
                             <input [(ngModel)]="courseName" name="courseName" class="form-control" id="courseName" placeholder="Enter course name" required #courseNameModel="ngModel">
                             <div *ngIf="courseNameModel.invalid && courseNameModel.touched" class="text-danger">
                                 Course Name is required
                             </div>
                         </div>
                         <div class="mb-3">
-                            <label for="courseDescription" class="form-label">Course Description</label>
+                            <label for="courseDescription" class="form-label">Descripcion del curso</label>
                             <input [(ngModel)]="courseDescription" name="courseDescription" class="form-control" id="courseDescription" placeholder="Enter course description" required #courseDescriptionModel="ngModel">
                             <div *ngIf="courseDescriptionModel.invalid && courseDescriptionModel.touched" class="text-danger">
                                 Course Description is required
@@ -144,7 +138,6 @@
                         </div>
                     </form>
 
-                    <!-- Tabla de cursos creados -->
                     <h5 class="mt-4">Cursos Creados</h5>
                     <table class="table table-hover table-bordered mt-2">
                         <thead class="table-dark">
@@ -159,16 +152,16 @@
                                 <td>{{ course.name }}</td>
                                 <td>{{ course.description }}</td>
                                 <td>
-                                    <button class="btn btn-info btn-sm me-2" (click)="editCourse(course)">Edit</button>
-                                    <button class="btn btn-danger btn-sm" (click)="deleteCourse(course.id)">Delete</button>
+                                    <button class="btn btn-info btn-sm me-2" (click)="editCourse(course)">Editar</button>
+                                    <button class="btn btn-danger btn-sm" (click)="deleteCourse(course.id)">Eliminar</button>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" [disabled]="courseForm.invalid" (click)="submitCourse()" data-bs-dismiss="modal">{{ editingCourse ? 'Update Course' : 'Save Course' }}</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" [disabled]="courseForm.invalid" (click)="submitCourse()" data-bs-dismiss="modal">{{ editingCourse ? 'Editar curso' : 'Guardar curso' }}</button>
                 </div>
             </div>
         </div>

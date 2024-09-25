@@ -17,7 +17,7 @@ import Swal from 'sweetalert2';
 })
 export class StudentComponent implements OnInit {
 
-  // Propiedades para enlazar con el formulario
+
   firstName: string = '';
   lastName: string = '';
   age: number | null = null;
@@ -31,7 +31,6 @@ export class StudentComponent implements OnInit {
   editing: boolean = false;
   currentStudentId: number | null = null;
 
-  // Propiedades para el formulario de cursos
   courseName: string = '';
   editingCourse: boolean = false;
   currentCourseId: number | null = null;
@@ -48,24 +47,21 @@ export class StudentComponent implements OnInit {
     this.loadCourses();
   }
 
-  // Cargar estudiantes
   loadStudents() {
     this.studentService.getStudents().subscribe(data => {
       this.students = data;
     });
   }
 
-  // Cargar cursos
   loadCourses() {
     this.courseService.getCourses().subscribe(data => {
       this.courses = data;
     });
   }
 
-  // Añadir o editar estudiante
   submitForm() {
     const student: Student = {
-      id: this.currentStudentId ?? 0, // ID solo si es una edición
+      id: this.currentStudentId ?? 0, 
       firstName: this.firstName,
       lastName: this.lastName,
       age: this.age!,
@@ -79,18 +75,17 @@ export class StudentComponent implements OnInit {
       this.studentService.updateStudent(this.currentStudentId, student).subscribe(() => {
         this.loadStudents();
         this.resetForm();
-        Swal.fire('Updated!', 'Student details have been updated successfully.', 'success'); // SweetAlert para éxito
+        Swal.fire('Updated!', 'Estudiante actualizado correctamente.', 'success'); 
       });
     } else {
       this.studentService.addStudent(student).subscribe(() => {
         this.loadStudents();
         this.resetForm();
-        Swal.fire('Added!', 'Student has been added successfully.', 'success'); // SweetAlert para éxito
+        Swal.fire('Added!', 'Estudiante agregado correctamente.', 'success'); 
       });
     }
   }
 
-    // Añadir o editar curso
     submitCourse() {
       const course: Course = {
         id: this.currentCourseId ?? 0,
@@ -102,78 +97,76 @@ export class StudentComponent implements OnInit {
         this.courseService.updateCourse(this.currentCourseId, course).subscribe(() => {
           this.loadCourses();
           this.resetCourseForm();
-          Swal.fire('Updated!', 'Course has been updated successfully.', 'success');
+          Swal.fire('Updated!', 'Curso actualizado correctamente.', 'success');
         });
       } else {
         this.courseService.createCourse(course).subscribe(() => {
           this.loadCourses();
           this.resetCourseForm();
-          Swal.fire('Added!', 'Course has been added successfully.', 'success');
+          Swal.fire('Added!', 'Curso añadido correctamente.', 'success');
         });
       }
     }
 
-     // Editar curso
   editCourse(course: Course) {
     this.editingCourse = true;
     this.currentCourseId = course.id;
     this.courseName = course.name;
     this.courseDescription = course.description;
 
-    // Abrir modal si es necesario (aunque ya está abierto por el botón)
   }
 
-  // Eliminar curso
   deleteCourse(courseId: number) {
     Swal.fire({
-      title: 'Are you sure?',
-      text: 'Do you really want to delete this course?',
+      title: 'Estas seguro?',
+      text: '¿Realmente desea eliminar este curso?',
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonText: 'Yes, delete it!',
-      cancelButtonText: 'No, cancel!'
+      confirmButtonText: 'si',
+      cancelButtonText: 'No, Cancelar!'
     }).then((result) => {
       if (result.isConfirmed) {
         this.courseService.deleteCourse(courseId).subscribe(() => {
           this.loadCourses();
-          Swal.fire('Deleted!', 'Course has been deleted successfully.', 'success');
+          Swal.fire('Deleted!', 'Curso Eliminado satisfactoriamente.', 'success');
         });
       }
     });
   }
 
-  // Editar estudiante
+ 
   editStudent(student: Student) {
+
+    console.log(student)
     this.editing = true;
     this.currentStudentId = student.id;
     this.firstName = student.firstName;
     this.lastName = student.lastName;
     this.age = student.age;
-    this.dateOfBirth = student.dateOfBirth.toISOString().split('T')[0]; // Convertir la fecha a un formato adecuado
+    this.dateOfBirth = student.dateOfBirth.toISOString().split('T')[0]; 
     this.address = student.address;
     this.courseId = student.courseId;
   }
 
-  // Borrar estudiante
+  
   deleteStudent(studentId: number) {
     Swal.fire({
-      title: 'Are you sure?',
-      text: 'Do you really want to delete this student?',
+      title: 'Estas seguro?',
+      text: '¿Realmente desea eliminar este estudiante?',
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonText: 'Yes, delete it!',
-      cancelButtonText: 'No, cancel!'
+      confirmButtonText: 'Si',
+      cancelButtonText: 'No, Cancelar!'
     }).then((result) => {
       if (result.isConfirmed) {
         this.studentService.deleteStudent(studentId).subscribe(() => {
           this.loadStudents();
-          Swal.fire('Deleted!', 'Student has been deleted successfully.', 'success'); // SweetAlert para éxito
+          Swal.fire('Deleted!', 'Estudiante eliminado satisfactoriamente.', 'success'); 
         });
       }
     });
   }
 
-  // Reiniciar formulario
   resetForm() {
     this.editing = false;
     this.currentStudentId = null;
@@ -185,7 +178,6 @@ export class StudentComponent implements OnInit {
     this.courseId = null;
   }
 
-   // Reiniciar el formulario de curso
    resetCourseForm() {
     this.editingCourse = false;
     this.currentCourseId = null;

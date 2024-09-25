@@ -22,7 +22,6 @@ export class LoginComponent {
   onSubmit() {
     this.authService.login(this.username, this.password).subscribe(
       () => {
-        // Alerta de éxito
         Swal.fire({
           icon: 'success',
           title: 'Login Successful',
@@ -31,11 +30,9 @@ export class LoginComponent {
           timer: 1000
         });
 
-        // Navegar a la página de estudiantes
         this.router.navigate(['/students']);
       },
       (error) => {
-        // Alerta de error
         Swal.fire({
           icon: 'error',
           title: 'Login Failed',
