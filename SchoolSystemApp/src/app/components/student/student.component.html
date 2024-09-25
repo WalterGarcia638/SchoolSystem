@@ -1,14 +1,20 @@
+<div class="container mt-5 text-center">
+    <h1>Sistema de registro de estudiantes</h1>
+</div>
+
+
 <div class="container mt-5">
     <!-- Barra de búsqueda -->
-    <div class="row mb-4">
-        <div class="col-md-12">
+    <div class="row mb-4 text-center">
+        <div class="col-md-6 mx-auto">
             <input type="text" [(ngModel)]="searchTerm" name="searchTerm" class="form-control" placeholder="Search by name" />
         </div>
     </div>
 
-    <!-- Botón para crear estudiante -->
-    <div class="d-grid gap-2 mb-4">
-        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#studentModal">Crear Estudiante</button>
+    <!-- Botones para crear estudiante y curso -->
+    <div class="d-flex justify-content-end mb-4">
+        <button class="btn btn-sm btn-primary me-2" data-bs-toggle="modal" data-bs-target="#studentModal">Crear Estudiante</button>
+        <button class="btn btn-sm btn-secondary" data-bs-toggle="modal" data-bs-target="#courseModal">Crear Curso</button>
     </div>
 
     <!-- Tabla de Estudiantes -->
@@ -40,7 +46,7 @@
         </tbody>
     </table>
 
-    <!-- Modal para el formulario -->
+    <!-- Modal para el formulario de Estudiante -->
     <div class="modal fade" id="studentModal" tabindex="-1" aria-labelledby="studentModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -87,6 +93,58 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-primary" (click)="submitForm()">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para el formulario de Curso -->
+    <div class="modal fade" id="courseModal" tabindex="-1" aria-labelledby="courseModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <!-- Se ajusta el tamaño del modal a grande -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="courseModalLabel">{{ editingCourse ? 'Edit Course' : 'Create Course' }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Formulario para crear/editar curso -->
+                    <form>
+                        <div class="mb-3">
+                            <label for="courseName" class="form-label">Course Name</label>
+                            <input [(ngModel)]="courseName" name="courseName" class="form-control" id="courseName" placeholder="Enter course name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="courseDescription" class="form-label">Course Description</label>
+                            <input [(ngModel)]="courseDescription" name="courseDescription" class="form-control" id="courseDescription" placeholder="Enter course description" required>
+                        </div>
+                    </form>
+
+                    <!-- Tabla de cursos creados -->
+                    <h5 class="mt-4">Cursos Creados</h5>
+                    <table class="table table-hover table-bordered mt-2">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let course of courses">
+                                <td>{{ course.name }}</td>
+                                <td>{{ course.description }}</td>
+                                <td>
+                                    <button class="btn btn-info btn-sm me-2" (click)="editCourse(course)">Edit</button>
+                                    <button class="btn btn-danger btn-sm" (click)="deleteCourse(course.id)">Delete</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" (click)="submitCourse()">{{ editingCourse ? 'Update Course' : 'Save Course' }}</button>
                 </div>
             </div>
         </div>

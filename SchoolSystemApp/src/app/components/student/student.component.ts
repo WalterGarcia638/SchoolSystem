@@ -31,6 +31,12 @@ export class StudentComponent implements OnInit {
   editing: boolean = false;
   currentStudentId: number | null = null;
 
+  // Propiedades para el formulario de cursos
+  courseName: string = '';
+  editingCourse: boolean = false;
+  currentCourseId: number | null = null;
+  courseDescription: string = '';
+
   constructor(
     private fb: FormBuilder,
     private studentService: StudentService,
@@ -84,6 +90,58 @@ export class StudentComponent implements OnInit {
     }
   }
 
+    // Añadir o editar curso
+    submitCourse() {
+      const course: Course = {
+        id: this.currentCourseId ?? 0,
+        name: this.courseName,
+        description: this.courseDescription
+      };
+  
+      if (this.editingCourse && this.currentCourseId !== null) {
+        this.courseService.updateCourse(this.currentCourseId, course).subscribe(() => {
+          this.loadCourses();
+          this.resetCourseForm();
+          Swal.fire('Updated!', 'Course has been updated successfully.', 'success');
+        });
+      } else {
+        this.courseService.createCourse(course).subscribe(() => {
+          this.loadCourses();
+          this.resetCourseForm();
+          Swal.fire('Added!', 'Course has been added successfully.', 'success');
+        });
+      }
+    }
+
+     // Editar curso
+  editCourse(course: Course) {
+    this.editingCourse = true;
+    this.currentCourseId = course.id;
+    this.courseName = course.name;
+    this.courseDescription = course.description;
+
+    // Abrir modal si es necesario (aunque ya está abierto por el botón)
+  }
+
+  // Eliminar curso
+  deleteCourse(courseId: number) {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'Do you really want to delete this course?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, cancel!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.courseService.deleteCourse(courseId).subscribe(() => {
+          this.loadCourses();
+          Swal.fire('Deleted!', 'Course has been deleted successfully.', 'success');
+        });
+      }
+    });
+  }
+
   // Editar estudiante
   editStudent(student: Student) {
     this.editing = true;
@@ -125,6 +183,13 @@ export class StudentComponent implements OnInit {
     this.dateOfBirth = '';
     this.address = '';
     this.courseId = null;
+  }
+
+   // Reiniciar el formulario de curso
+   resetCourseForm() {
+    this.editingCourse = false;
+    this.currentCourseId = null;
+    this.courseName = '';
   }
 
   getFilteredStudents(): Student[] {
