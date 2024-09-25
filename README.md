@@ -2,6 +2,12 @@
 
 This is a web-based application designed for managing school records, including students and courses. The backend is built with .NET 8, and the frontend is built with Angular 17.3.9.
 
+### Credentials Section:
+In the **Default Credentials** section, the default credentials have been added:
+
+- **Username:** `admin`
+- **Password:** `password`
+
 ## Technologies Used
 
 - **Node.js:** v20.9.0
