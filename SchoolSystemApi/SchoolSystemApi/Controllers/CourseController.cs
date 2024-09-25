@@ -74,7 +74,7 @@ namespace SchoolSystemApi.Controllers
             return Ok();
         }
 
-        [HttpPatch("{CourseId:int}", Name = "GetCourseById")]
+        [HttpPatch("{CourseId:int}", Name = "UpdateCourse")]
         public IActionResult UpdateCourse(int CourseId, [FromBody] Course Course)
         {
             if (Course == null || CourseId == null || Course.Id == 0)
@@ -91,7 +91,7 @@ namespace SchoolSystemApi.Controllers
         }
 
         [HttpDelete("{CourseId:int}", Name = "DeleteCourse")]
-        public IActionResult DeleteBrand(int CourseId)
+        public IActionResult DeleteCourse(int CourseId)
         {
             if (!_CourseRepository.ExistCourse(CourseId))
             {

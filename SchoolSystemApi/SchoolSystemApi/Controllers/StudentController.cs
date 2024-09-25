@@ -76,23 +76,8 @@ namespace SchoolSystemApi.Controllers
             return Ok();
         }
 
-        /*   [HttpPatch("{StudentId:int}", Name = "GetStudentById")]
-           public IActionResult UpdateStudent(int StudentId, [FromBody] Student Student)
-           {
-               if (Student == null || StudentId == null || Student.Id == 0)
-               {
-                   return BadRequest(ModelState);
-               }
 
-               if (!_StudentRepository.UpdateStudent(Student))
-               {
-                   ModelState.AddModelError("", $"Error Update {Student.FirstName}");
-                   return StatusCode(500, ModelState);
-               }
-               return NoContent();
-           }*/
-
-        [HttpPatch("{StudentId:int}", Name = "GetStudentById")]
+        [HttpPatch("{StudentId:int}", Name = "UpdateStudent")]
         public IActionResult UpdateStudent(int StudentId, [FromBody] UpdateStudentDTO updateStudentDTO)
         {
             if (updateStudentDTO == null || StudentId == null || updateStudentDTO.Id == 0)
@@ -111,7 +96,7 @@ namespace SchoolSystemApi.Controllers
         }
 
         [HttpDelete("{StudentId:int}", Name = "DeleteStudent")]
-        public IActionResult DeleteBrand(int StudentId)
+        public IActionResult DeleteStudent(int StudentId)
         {
             if (!_StudentRepository.ExistStudent(StudentId))
             {

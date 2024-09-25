@@ -14,9 +14,8 @@ namespace SchoolSystemApi.Repository
         }
         public ICollection<Student> GetStudents()
         {
-            // return _db.Student.OrderBy(b => b.Id).ToList();
             return _db.Student
-             .Include(s => s.Course) // Carga el curso asociado a cada estudiante
+             .Include(s => s.Course)
              .OrderBy(b => b.Id)
              .ToList();
         }

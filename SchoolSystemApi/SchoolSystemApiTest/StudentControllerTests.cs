@@ -31,8 +31,8 @@ namespace SchoolSystemApiTest
         public void GetStudent_ReturnsOkResult_WithListOfStudents()
         {
             // Arrange
-            var students = new List<Student> { new Student { Id = 1, FirstName = "John", LastName = "Doe" } };
-            var studentsDTO = new List<GetStudentsDTO> { new GetStudentsDTO { Id = 1, FirstName = "John", LastName = "Doe" } };
+            var students = new List<Student> { new Student { Id = 1, FirstName = "Walter", LastName = "Garcia" } };
+            var studentsDTO = new List<GetStudentsDTO> { new GetStudentsDTO { Id = 1, FirstName = "Walter", LastName = "Garcia" } };
 
             _mockRepo.Setup(repo => repo.GetStudents()).Returns(students);
             _mockMapper.Setup(mapper => mapper.Map<ICollection<GetStudentsDTO>>(students)).Returns(studentsDTO);
@@ -47,7 +47,7 @@ namespace SchoolSystemApiTest
         }
 
         [Fact]
-        public void GetStudentById_ReturnsNotFound_WhenStudentDoesNotExist()
+        public void GetStudentById_ReturnsNotFound_WhenStudentGarciasNotExist()
         {
             // Arrange
             _mockRepo.Setup(repo => repo.GetStudent(It.IsAny<int>())).Returns((Student)null);
@@ -63,11 +63,11 @@ namespace SchoolSystemApiTest
         public void GetStudentByName_ReturnsOk_WhenStudentExists()
         {
             // Arrange
-            var student = new Student { Id = 1, FirstName = "John", LastName = "Doe" };
-            _mockRepo.Setup(repo => repo.GetStudentByName("John")).Returns(student);
+            var student = new Student { Id = 1, FirstName = "Walter", LastName = "Garcia" };
+            _mockRepo.Setup(repo => repo.GetStudentByName("Walter")).Returns(student);
 
             // Act
-            var result = _controller.GetStudentByName("John");
+            var result = _controller.GetStudentByName("Walter");
 
             // Assert
             result.Should().BeOfType<OkObjectResult>().Which.StatusCode.Should().Be(200);
@@ -87,8 +87,8 @@ namespace SchoolSystemApiTest
         public void UpdateStudent_ReturnsNoContent_WhenUpdateIsSuccessful()
         {
             // Arrange
-            var updateStudentDTO = new UpdateStudentDTO { Id = 1, FirstName = "John", LastName = "Doe" };
-            var student = new Student { Id = 1, FirstName = "John", LastName = "Doe" };
+            var updateStudentDTO = new UpdateStudentDTO { Id = 1, FirstName = "Walter", LastName = "Garcia" };
+            var student = new Student { Id = 1, FirstName = "Walter", LastName = "Garcia" };
 
             _mockMapper.Setup(mapper => mapper.Map<Student>(updateStudentDTO)).Returns(student);
             _mockRepo.Setup(repo => repo.UpdateStudent(student)).Returns(true);
@@ -104,14 +104,14 @@ namespace SchoolSystemApiTest
         public void DeleteStudent_ReturnsNoContent_WhenDeleteIsSuccessful()
         {
             // Arrange
-            var student = new Student { Id = 1, FirstName = "John", LastName = "Doe" };
+            var student = new Student { Id = 1, FirstName = "Walter", LastName = "Garcia" };
 
             _mockRepo.Setup(repo => repo.ExistStudent(1)).Returns(true);
             _mockRepo.Setup(repo => repo.GetStudent(1)).Returns(student);
             _mockRepo.Setup(repo => repo.DeleteStudent(student)).Returns(true);
 
             // Act
-            var result = _controller.DeleteBrand(1);
+            var result = _controller.DeleteStudent(1);
 
             // Assert
             result.Should().BeOfType<NoContentResult>().Which.StatusCode.Should().Be(204);

@@ -22,7 +22,6 @@ namespace SchoolSystemApi.Auth
         [HttpPost("login")]
         public IActionResult Login([FromBody] LoginRequest request)
         {
-            // Validar el usuario (por simplicidad, se usa una validación ficticia)
             if (request.Username == "admin" && request.Password == "password")
             {
                 var token = GenerateJwtToken(request.Username);
