@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SchoolSystemApi.Model;
+using SchoolSystemApi.Model.DTO;
 using SchoolSystemApi.Repository.IRepository;
 
 namespace SchoolSystemApi.Controllers
@@ -10,9 +12,11 @@ namespace SchoolSystemApi.Controllers
     public class StudentController : ControllerBase
     {
         private readonly IStudentRepository _StudentRepository;
-        public StudentController(IStudentRepository StudentRepository)
+        private readonly IMapper _mapper;
+        public StudentController(IStudentRepository StudentRepository, IMapper mapper)
         {
             _StudentRepository = StudentRepository;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -53,21 +57,18 @@ namespace SchoolSystemApi.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateStudent([FromBody] Student Student)
+        public IActionResult CreateStudent([FromBody] StudentDTO StudentDto)
         {
-            if (Student == null)
+            if (StudentDto == null)
             {
                 return BadRequest(ModelState);
             }
-           /* if (_StudentRepository.ExistStudent(Student.Name))
-            {
-                ModelState.AddModelError("", "The Student is Exist");
-                return StatusCode(500, ModelState);
-            }*/
 
-            if (!_StudentRepository.CreateStudent(Student))
+            var student = _mapper.Map<Student>(StudentDto);
+
+            if (!_StudentRepository.CreateStudent(student))
             {
-                ModelState.AddModelError("", $"Error Saving{Student.FirstName}");
+                ModelState.AddModelError("", $"Error Saving{StudentDto.FirstName}");
                 return StatusCode(500, ModelState);
             }
 

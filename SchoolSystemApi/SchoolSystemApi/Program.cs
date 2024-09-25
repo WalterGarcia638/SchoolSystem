@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using SchoolSystemApi.Data;
 using SchoolSystemApi.Repository.IRepository;
 using SchoolSystemApi.Repository;
+using SchoolSystemApi.Mapper;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +17,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(Options => Options.UseSqlSer
 //Services
 builder.Services.AddScoped<ICourseRepository, CourseRepository>();
 builder.Services.AddScoped<IStudentRepository, StudentRepository>();
+
+builder.Services.AddAutoMapper(typeof(SchoolSystemMapper));
 
 builder.Services.AddCors(options =>
 {

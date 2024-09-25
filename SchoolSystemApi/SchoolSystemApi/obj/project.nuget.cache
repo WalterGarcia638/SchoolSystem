@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "eJfKKA04ofgW9vUXgB6yTqB+EhC9w/oypEvN7HIAlFYA0rLGnw++UvPj3n8q8XuRC18wOZWfj8kDNXBpoZzSBg==",
+  "dgSpecHash": "K4CYXXx0bzVdgSiABMlMiJn5RfQ+v2GKf9YmV9SyshmPAWV7hHQMONGwbSrbZfZir8n2o3SAbiX0We/OVu/sWA==",
   "success": true,
   "projectFilePath": "D:\\PruebaTecnica\\BHD\\SchoolSystem\\SchoolSystemApi\\SchoolSystemApi\\SchoolSystemApi.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Walter Garcia\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\Walter Garcia\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\Walter Garcia\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",
     "C:\\Users\\Walter Garcia\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",

@@ -59,14 +59,14 @@ export class StudentComponent implements OnInit {
   // Añadir o editar estudiante
   submitForm() {
     const student: Student = {
-      studentId: this.currentStudentId ?? 0, // ID solo si es una edición
+      Id: this.currentStudentId ?? 0, // ID solo si es una edición
       firstName: this.firstName,
       lastName: this.lastName,
       age: this.age!,
       dateOfBirth: new Date(this.dateOfBirth),
       address: this.address,
       courseId: this.courseId!,
-      course: this.courses.find(c => c.courseId === this.courseId) || { courseId: 0, name: '', description: '' }
+      //course: this.courses.find(c => c.courseId === this.courseId) || { courseId: 0, name: '', description: '' }
     };
 
     if (this.editing && this.currentStudentId !== null) {
@@ -85,7 +85,7 @@ export class StudentComponent implements OnInit {
   // Editar estudiante
   editStudent(student: Student) {
     this.editing = true;
-    this.currentStudentId = student.studentId;
+    this.currentStudentId = student.Id;
     this.firstName = student.firstName;
     this.lastName = student.lastName;
     this.age = student.age;

@@ -1,12 +1,12 @@
 import { Course } from "./Course";
 
 export interface Student {
-    studentId: number;
+    Id: number;
     firstName: string;
     lastName: string;
     age: number;
     dateOfBirth: Date;
     address: string;
     courseId: number;
-    course: Course;
+    course?: Course;
   }

@@ -6,7 +6,8 @@
                     <h3>Student Registration</h3>
                 </div>
                 <div class="card-body">
-                    <form (ngSubmit)="submitForm()">
+                    <!--<form (ngSubmit)="submitForm()">-->
+                    <form>
                         <div class="mb-3">
                             <label for="firstName" class="form-label">First Name</label>
                             <input [(ngModel)]="firstName" name="firstName" class="form-control" id="firstName" placeholder="Enter first name" required>
@@ -35,12 +36,12 @@
                         <div class="mb-3">
                             <label for="courseId" class="form-label">Course</label>
                             <select [(ngModel)]="courseId" name="courseId" class="form-select" id="courseId" required>
-                  <option *ngFor="let course of courses" [value]="course.courseId">{{ course.name }}</option>
+                  <option *ngFor="let course of courses" [value]="course.id">{{ course.name }}</option>
                 </select>
                         </div>
 
                         <div class="d-grid gap-2">
-                            <button type="submit" class="btn btn-primary">Save</button>
+                            <button type="submit" class="btn btn-primary" (click)="submitForm()">Save</button>
                         </div>
                     </form>
                 </div>
@@ -56,11 +57,11 @@
             <ul class="list-group mt-3">
                 <li *ngFor="let student of students" class="list-group-item d-flex justify-content-between align-items-center">
                     <div>
-                        <strong>{{ student.firstName }} {{ student.lastName }}</strong> - {{ student.course.name }}
+                        <strong>{{ student.firstName }} {{ student.lastName }}</strong>
                     </div>
                     <div>
                         <button (click)="editStudent(student)" class="btn btn-sm btn-info me-2">Edit</button>
-                        <button (click)="deleteStudent(student.studentId)" class="btn btn-sm btn-danger">Delete</button>
+                        <button (click)="deleteStudent(student.Id)" class="btn btn-sm btn-danger">Delete</button>
                     </div>
                 </li>
             </ul>

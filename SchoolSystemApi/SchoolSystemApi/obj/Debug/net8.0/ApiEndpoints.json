@@ -113,8 +113,8 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "Student",
-        "Type": "SchoolSystemApi.Model.Student",
+        "Name": "StudentDto",
+        "Type": "SchoolSystemApi.Model.DTO.StudentDTO",
         "IsRequired": true
       }
     ],
